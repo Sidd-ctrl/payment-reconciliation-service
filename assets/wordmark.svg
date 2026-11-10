@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 140" width="640" height="140">
+  <defs>
+    <linearGradient id="navy" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#101F3C"/>
+      <stop offset="1" stop-color="#060D1F"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F6D876"/>
+      <stop offset="0.5" stop-color="#D4AF37"/>
+      <stop offset="1" stop-color="#A8842A"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="140" rx="18" fill="url(#navy)"/>
+  <rect x="0" y="118" width="640" height="4" fill="url(#gold)" opacity="0.9"/>
+  <circle cx="70" cy="60" r="30" fill="none" stroke="url(#gold)" stroke-width="4"/>
+  <text x="70" y="72" text-anchor="middle" font-family="Georgia, serif" font-size="34" font-weight="bold" fill="url(#gold)">₹</text>
+  <text x="122" y="56" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="bold" letter-spacing="2.5" fill="#F5E7BE">PAYMENT RECONCILIATION</text>
+  <text x="122" y="88" font-family="Georgia, serif" font-size="17" letter-spacing="6" fill="#B08D2E">GHARANA HOME CO.</text>
+</svg>

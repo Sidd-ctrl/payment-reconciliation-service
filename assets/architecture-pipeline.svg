@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 560" width="1180" height="560" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0B1426"/><stop offset="1" stop-color="#060D1C"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#14213C"/><stop offset="1" stop-color="#0E1830"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#F6D876"/><stop offset="0.5" stop-color="#D4AF37"/><stop offset="1" stop-color="#8A6B1D"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#D4AF37"/>
+    </marker>
+  </defs>
+
+  <rect width="1180" height="560" fill="url(#bg)" rx="16"/>
+  <text x="40" y="52" font-size="26" font-weight="bold" fill="#F5E7BE" letter-spacing="1.5">RECONCILIATION PIPELINE</text>
+  <text x="40" y="78" font-size="13" fill="#8FA3C7" letter-spacing="2">STREAMING · EXACT INTEGER PAISE · O(1) MEMORY IN EVENT COUNT</text>
+  <rect x="40" y="92" width="1100" height="2" fill="url(#gold)" opacity="0.7"/>
+
+  <!-- Inputs -->
+  <g>
+    <rect x="40" y="130" width="180" height="86" rx="10" fill="url(#card)" stroke="#D4AF37" stroke-width="1.6"/>
+    <text x="130" y="165" text-anchor="middle" font-size="16" fill="#F5E7BE" font-weight="bold">orders.csv</text>
+    <text x="130" y="190" text-anchor="middle" font-size="11" fill="#8FA3C7">order_id · amount_inr</text>
+
+    <rect x="40" y="300" width="180" height="86" rx="10" fill="url(#card)" stroke="#D4AF37" stroke-width="1.6"/>
+    <text x="130" y="335" text-anchor="middle" font-size="16" fill="#F5E7BE" font-weight="bold">events.jsonl</text>
+    <text x="130" y="360" text-anchor="middle" font-size="11" fill="#8FA3C7">at-least-once · any order</text>
+  </g>
+
+  <!-- Phase 1 -->
+  <g>
+    <rect x="280" y="130" width="240" height="86" rx="10" fill="url(#card)" stroke="#3A4A6B" stroke-width="1.4"/>
+    <text x="300" y="158" font-size="13" fill="#D4AF37" font-weight="bold" letter-spacing="1">PHASE 1 · STAGE ORDERS</text>
+    <text x="300" y="182" font-size="12" fill="#DCE6F7">csv → SQLite · ₹→paise</text>
+    <text x="300" y="202" font-size="11" fill="#8FA3C7">duplicate order_ids flagged</text>
+  </g>
+
+  <!-- Phase 2 -->
+  <g>
+    <rect x="280" y="280" width="240" height="150" rx="10" fill="url(#card)" stroke="#3A4A6B" stroke-width="1.4"/>
+    <text x="300" y="308" font-size="13" fill="#D4AF37" font-weight="bold" letter-spacing="1">PHASE 2 · STREAM EVENTS</text>
+    <text x="300" y="332" font-size="12" fill="#DCE6F7">line → parse → validate</text>
+    <text x="300" y="352" font-size="12" fill="#DCE6F7">v1 ₹ / v2 paise → paise</text>
+    <text x="300" y="374" font-size="12" fill="#DCE6F7">event_id de-dupe (UNIQUE)</text>
+    <text x="300" y="396" font-size="12" fill="#DCE6F7">orphans → report, skipped</text>
+    <text x="300" y="418" font-size="11" fill="#8FA3C7">invalid → counted + sampled</text>
+  </g>
+
+  <!-- Arrows in -->
+  <line x1="220" y1="173" x2="272" y2="173" stroke="#D4AF37" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="220" y1="343" x2="272" y2="343" stroke="#D4AF37" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- SQLite -->
+  <g>
+    <rect x="580" y="190" width="220" height="130" rx="10" fill="url(#card)" stroke="#D4AF37" stroke-width="1.6" stroke-dasharray="6 4"/>
+    <ellipse cx="690" cy="228" rx="58" ry="14" fill="#0E1830" stroke="#D4AF37" stroke-width="1.4"/>
+    <path d="M632 228 L632 292 A58 14 0 0 0 748 292 L748 228" fill="#0E1830" stroke="#D4AF37" stroke-width="1.4"/>
+    <text x="690" y="267" text-anchor="middle" font-size="12" fill="#F5E7BE">SQLite staging</text>
+    <text x="690" y="285" text-anchor="middle" font-size="10" fill="#8FA3C7">on-disk · disposable</text>
+  </g>
+  <line x1="520" y1="173" x2="580" y2="225" stroke="#D4AF37" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="520" y1="343" x2="580" y2="300" stroke="#D4AF37" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Phase 3 -->
+  <g>
+    <rect x="860" y="190" width="280" height="130" rx="10" fill="url(#card)" stroke="#3A4A6B" stroke-width="1.4"/>
+    <text x="880" y="218" font-size="13" fill="#D4AF37" font-weight="bold" letter-spacing="1">PHASE 3 · MERGE-JOIN</text>
+    <text x="880" y="242" font-size="12" fill="#DCE6F7">orders ⋈ events ORDER BY</text>
+    <text x="880" y="262" font-size="12" fill="#DCE6F7">order_id, sent_at_us, event_id</text>
+    <text x="880" y="286" font-size="12" fill="#DCE6F7">state machine · mismatch check</text>
+    <text x="880" y="306" font-size="11" fill="#8FA3C7">all money in integer paise</text>
+  </g>
+  <line x1="800" y1="255" x2="852" y2="255" stroke="#D4AF37" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Outputs -->
+  <g>
+    <rect x="860" y="360" width="280" height="150" rx="10" fill="url(#card)" stroke="#D4AF37" stroke-width="1.6"/>
+    <text x="880" y="388" font-size="13" fill="#D4AF37" font-weight="bold" letter-spacing="1">OUTPUTS</text>
+    <text x="880" y="412" font-size="12" fill="#DCE6F7">order_states.csv</text>
+    <text x="880" y="432" font-size="12" fill="#DCE6F7">summary.json</text>
+    <text x="880" y="452" font-size="12" fill="#DCE6F7">orphan_events.csv</text>
+    <text x="880" y="472" font-size="12" fill="#DCE6F7">mismatches.csv</text>
+  </g>
+  <line x1="1000" y1="320" x2="1000" y2="352" stroke="#D4AF37" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <text x="40" y="535" font-size="11" fill="#5E7099">50M events: disk-backed dedupe · streaming cursors · constant memory · single pass</text>
+</svg>

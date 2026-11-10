@@ -1,0 +1,32 @@
+question,answer,source
+How many orders are there in total?,1953,summary.json: total_orders
+How many orders are in state CREATED?,107,summary.json: orders_by_state.CREATED
+How many orders are in state FAILED?,142,summary.json: orders_by_state.FAILED
+How many orders are in state AUTHORIZED?,66,summary.json: orders_by_state.AUTHORIZED
+How many orders are in state EXPIRED?,62,summary.json: orders_by_state.EXPIRED
+How many orders are in state CAPTURED?,1401,summary.json: orders_by_state.CAPTURED
+How many orders are in state PARTIALLY_REFUNDED?,70,summary.json: orders_by_state.PARTIALLY_REFUNDED
+How many orders are in state REFUNDED?,105,summary.json: orders_by_state.REFUNDED
+How many orders had money actually captured?,1576,order_states.csv: count(captured_inr > 0) = CAPTURED + PARTIALLY_REFUNDED + REFUNDED
+How many unique events are in the webhook log?,3962,summary.json: unique_events
+How many duplicate webhook deliveries were ignored?,235,summary.json: duplicate_deliveries_ignored
+How many raw lines were read from events.jsonl?,4197,summary.json: diagnostics.total_lines_read
+How many events could not be attributed to an order (orphans)?,12,summary.json: orphan_events
+What is the total value of orphan events?,11988.00,"orphan_events.csv: sum(amount_inr) — all payment.captured, all ord_ext* IDs @ 999.00"
+How many events were invalid and skipped?,0,summary.json: invalid_events
+How many unique events were actually processed?,3950,summary.json: processed_events (unique - orphans)
+How many orders are flagged as mismatched (captured != billed)?,20,summary.json: mismatched_orders
+What is the total shortfall on the mismatched orders?,395.00,"mismatches.csv: sum(abs(difference_inr)) — five -1.00, nine -10.00, six -50.00"
+What is the total captured amount in INR?,2964629.00,summary.json: total_captured_inr
+What is the total refunded amount in INR?,232902.10,summary.json: total_refunded_inr
+What are the total gateway fees in INR (2% of captures)?,59292.58,summary.json: gateway_fees_inr
+What is the net settlement amount in INR?,2672434.32,summary.json: net_settlement_inr (captured - fees - refunded)
+What is the settlement amount before refunds are deducted in INR?,2905336.42,summary.json: net_settlement_before_refunds_inr (captured - fees)
+"How many refunds are pending (refund.created, never processed)?",201,summary.json: diagnostics.pending_refunds_not_yet_processed
+How many orders were over-refunded (refunded > captured)?,0,summary.json: diagnostics.over_refunded_orders
+How many refunds were processed without a capture?,0,summary.json: diagnostics.refunds_without_capture
+How many stale failures were ignored (failure after capture)?,0,summary.json: diagnostics.stale_failures_ignored
+How many stale authorizations were ignored?,0,summary.json: diagnostics.stale_authorizations_ignored
+How many duplicate rows are there in orders.csv?,0,summary.json: diagnostics.duplicate_orders_in_orders_csv
+What settlement cut-off was used?,2026-06-30T23:59:59+05:30,summary.json: settlement_cutoff_ist
+"In which states are the 1,576 orders with captures broken down?",1401 CAPTURED / 70 PARTIALLY_REFUNDED / 105 REFUNDED,summary.json: orders_by_state

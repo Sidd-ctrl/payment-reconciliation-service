@@ -1,0 +1,30 @@
+# ── Your unique, confidential datasets — never commit these ───────────────
+data/orders.csv
+data/events.jsonl
+data/answers.csv
+*.sqlite
+*.sqlite-journal
+
+# Generated outputs may embed confidential financials
+outputs/order_states.csv
+outputs/summary.json
+outputs/orphan_events.csv
+outputs/mismatches.csv
+docs/findings.md
+!docs/findings.template.md
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
